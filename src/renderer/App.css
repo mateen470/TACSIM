@@ -53,6 +53,45 @@ input[type='number'] {
   text-decoration: none;
   position: absolute;
 }
+.navigation_button_with_bigger_width_1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 340px;
+  height: 100px;
+  text-decoration: none;
+  position: absolute;
+  z-index: 10;
+}
+.btn_plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.7rem;
+  border: 1px solid #9a9796;
+  height: 45px;
+  width: auto;
+  cursor: pointer;
+  text-decoration: none;
+  background: none;
+  border-radius: 10px;
+  position: absolute;
+  transition: 0.15s all ease;
+}
+.btn_plus img {
+  margin: 0rem 0.8rem;
+}
+.btn_plus span {
+  margin-right: 0.8rem;
+}
+.btn_plus:hover {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.689);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.09);
+}
 
 /* MAIN-MENU STYLING--START */
 .main_class {
@@ -106,6 +145,7 @@ input[type='number'] {
   background-color: rgba(255, 255, 255, 0.23);
   color: #ffffff;
   font-size: 42px;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.786);
   backdrop-filter: blur(0px);
   transition: transform 0.3s ease-in-out;
 }
@@ -251,6 +291,147 @@ input[type='number'] {
   font-size: 1.5rem;
 }
 /* TUTORIALS-END */
+
+/* SELECT-STUDENT-INSTRUCTOR-START */
+.select_student_instructor_main_content_container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.select_student_instructor_main_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 50px;
+  height: 53vh;
+  width: 950px;
+}
+.select_student_instructor__tab_content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.select_student_instructor_tabs_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 3.5rem;
+}
+.tabs_container {
+  position: absolute;
+  height: 30vh;
+  top: 8.5rem;
+}
+.tabs_container_basic_advance {
+  position: absolute;
+  height: 45vh;
+  top: 8.5rem;
+}
+.select_student_instructor_tab_button {
+  font-size: 2rem;
+  color: #ffffff;
+  cursor: pointer;
+  width: 250px;
+  border: 1px solid white;
+  text-align: center;
+}
+.select_student_instructor_tab_button:hover {
+  text-decoration: underline;
+}
+.select_student_instructot_tab_input_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 800px;
+  height: 70px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(2px);
+  border-radius: 10px;
+  padding: 0rem 4rem;
+}
+.select_student_instructot_tab_input_container input {
+  background-color: #00000088;
+  width: 450px;
+  height: 50px;
+  border-radius: 10px;
+  position: relative;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.5rem;
+  padding: 0rem 1rem;
+}
+.select_student_instructot_tab_input_container span {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+}
+/* SELECT-STUDENT-INSTRUCTOR-END */
+
+/* ADD BACTH USER-START */
+.add_batch_user_table_main_container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+.add_batch_user_table_content {
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-top: 15vh;
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.137);
+  width: 75vw;
+  height: 60vh;
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
+}
+.add_batch_user_table_head {
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.137);
+  background-color: rgba(255, 255, 255, 0.15);
+  display: flex;
+  padding: 0rem 1rem;
+}
+.add_batch_user_table_head span {
+  color: white;
+  font-weight: 800;
+  font-size: 2rem;
+  height: 8vh;
+  width: 15vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add_batch_user_table_body {
+  height: 52.4vh;
+  overflow-y: auto;
+}
+.add_batch_user_table_body_row {
+  width: 75vw;
+  height: 7vh;
+  display: flex;
+  border-bottom: 2px solid #dae3eb69;
+}
+.add_batch_user_table_body_row input {
+  width: 15vw;
+  height: 7vh;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1.7rem;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0rem 0.5rem;
+}
+/* ADD BACTH USER-END */
 
 /* CUSTOM-MODAL-START */
 .modal_backdrop {
