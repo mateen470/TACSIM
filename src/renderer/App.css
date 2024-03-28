@@ -16,6 +16,21 @@ input[type='number']::-webkit-outer-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+/* COMMON STYLE-START */
+.main_class {
+  min-height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.blue_shade_bg {
+  position: absolute;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 #first_span_navigation_button {
   font-size: 1.1rem;
   font-weight: 500;
@@ -42,6 +57,8 @@ input[type='number'] {
   width: 200px;
   height: 100px;
   text-decoration: none;
+  position: absolute;
+  z-index: 10;
 }
 .navigation_button_with_bigger_width_2 {
   display: flex;
@@ -92,14 +109,9 @@ input[type='number'] {
   backdrop-filter: blur(10px);
   background-color: rgba(255, 255, 255, 0.09);
 }
+/* COMMON STYLE-END */
 
 /* MAIN-MENU STYLING--START */
-.main_class {
-  min-height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 .main_content {
   min-height: 100vh;
   display: flex;
@@ -191,14 +203,19 @@ input[type='number'] {
 }
 .past_simulation_tab_filter {
   text-transform: uppercase;
-  font-weight: 600;
-  color: #dae3eb;
+  font-weight: 700;
+  color: #efe6e6;
   font-size: 1.4rem;
 }
 .past_simulation_tab_table {
   margin: 1rem;
   overflow-y: auto;
   margin-top: 5rem;
+  height: 49vh;
+}
+.past_simulation_individual_simulation_data_container {
+  overflow-y: auto;
+  height: 53vh;
 }
 .past_simulation_tab_table_heading_container {
   display: flex;
@@ -208,8 +225,8 @@ input[type='number'] {
 }
 .past_simulation_tab_table_name_heading,
 .past_simulation_tab_table_heading {
-  font-weight: 600;
-  color: #dae3eb;
+  font-weight: 700;
+  color: #efe6e6;
   text-transform: uppercase;
   font-size: 1.3rem;
 }
@@ -217,7 +234,10 @@ input[type='number'] {
   width: 50%;
 }
 .past_simulation_tab_table_heading {
-  width: 25%;
+  width: 20%;
+}
+.past_simulation_tab_table_heading_repeat {
+  width: 10%;
 }
 .past_simulation_tab_table_data_container {
   margin: 1rem 0rem;
@@ -233,21 +253,133 @@ input[type='number'] {
   width: 50%;
 }
 #past_simulation_tab_table_name_data_first_phrase {
-  font-weight: 600;
+  font-weight: 700;
   color: #ffffff;
   font-size: 1.2rem;
-  width: 25%;
+  width: 20%;
   text-transform: uppercase;
   white-space: nowrap;
+  cursor: pointer;
+}
+#past_simulation_individual_simulation_data_heading_first_phrase {
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+#past_simulation_tab_table_name_data_first_phrase:hover {
+  text-decoration: underline;
 }
 #past_simulation_tab_table_name_data_second_phrase,
 .past_simulation_tab_table_data {
   font-weight: 600;
   font-size: 1.2rem;
   color: #dae3eb;
-  width: 25%;
+  width: 20%;
   white-space: nowrap;
   text-transform: uppercase;
+}
+.past_simulation_tab_repeat_btn {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: #ffffff;
+  width: 10%;
+  text-transform: uppercase;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.past_simulation_individual_simulation_data_heading_second_phrase {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+.past_simulation_individual_simulation_data_heading_second_phrase > span {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #dae3eb;
+  text-transform: uppercase;
+}
+.past_simulation_individual_simulation_data_row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #fdfdfd;
+  margin-top: 0.5rem;
+  padding: 1rem 3rem;
+  width: 100%;
+  gap: 5rem;
+}
+.past_simulation_individual_simulation_data_row_content_part {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
+.past_simulation_individual_simulation_data_row_column_heading_main_class {
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.team_player_information_in_single_row {
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.3rem;
+}
+.past_simulation_individual_simulation_data_row_column {
+  display: flex;
+  flex-direction: column;
+}
+.past_simulation_individual_simulation_data_row_column_heading,
+.past_simulation_individual_simulation_data_row_Squad_code {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #dae3eb;
+  text-transform: uppercase;
+}
+.past_simulation_individual_simulation_data_row_Squad_code {
+  text-align: center;
+}
+.past_simulation_individual_simulation_data_row_column_data {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+#past_simulation_individual_simulation_data_row_column_1 {
+  width: 15%;
+  padding-top: 2rem;
+}
+.past_simulation_individual_simulation_data_row_column_2 {
+  width: 40%;
+}
+.simulation_name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: left;
+}
+.past_simulation_individual_simulation_data_row_column_3 {
+  width: 15%;
+}
+.past_simulation_individual_simulation_data_row_column_4 {
+  width: 20%;
+  text-align: center;
+}
+.past_simulation_individual_simulation_data_row_column_5 {
+  width: 20%;
+  text-align: center;
+}
+.report_video {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.back_btn_individual_simulation {
+  position: absolute;
+  cursor: pointer;
+  top: 66.3px;
+  left: 40px;
 }
 /*PAST-SIMULATION-END */
 
@@ -435,16 +567,16 @@ input[type='number'] {
 
 /* CUSTOM-MODAL-START */
 .modal_backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
   background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 100;
 }
 .modal_content {
   display: flex;

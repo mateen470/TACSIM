@@ -6,6 +6,7 @@ import { Mousewheel, Pagination } from 'swiper/modules';
 import { useSpring, animated } from '@react-spring/web';
 import 'swiper/css';
 import '../renderer/App.css';
+import blue_shade from '../TACSIM-img/blu_shade.svg';
 import mainMenu from '../TACSIM-img/main_menu.svg';
 
 SwiperCore.use([Mousewheel, Pagination]);
@@ -23,6 +24,12 @@ export default function MainMenu() {
     from: { x: -1000 },
     to: { x: 0 },
     delay: 300,
+  });
+
+  const fadeIn = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    config: { duration: 300 },
   });
 
   const swiperRef = useRef(null);
@@ -45,18 +52,14 @@ export default function MainMenu() {
   }, []);
 
   return (
-    <div
-      className="main_class"
-      style={{ backgroundImage: `url(${mainMenu})` }}
-    >
+    <div className="main_class" style={{ backgroundImage: `url(${mainMenu})` }}>
+      <animated.div style={fadeIn}>
+        <img src={blue_shade} className="blue_shade_bg" alt="blue shade" />
+      </animated.div>
       <div className="main_content">
         <NavLink to="/">Home</NavLink>
         <div className="button_slider">
-          <animated.div
-            style={{
-              ...springs,
-            }}
-          >
+          <animated.div style={springs}>
             <Swiper
               ref={swiperRef}
               direction="vertical"

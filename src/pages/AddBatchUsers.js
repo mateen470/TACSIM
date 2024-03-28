@@ -6,12 +6,19 @@ import Footer from '../utility/Footer';
 import mainMenu from '../TACSIM-img/main_menu.svg';
 import backButton from '../TACSIM-img/back_button.svg';
 import plus from '../TACSIM-img/plus.svg';
+import blue_shade from '../TACSIM-img/blu_shade.svg';
 
 export default function AddBatchUsers() {
   const springs = useSpring({
     from: { x: -2000, y: 10 },
     to: { x: 0 },
     delay: 200,
+  });
+
+  const fadeIn = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    config: { duration: 500 },
   });
 
   const [addBatchUsers, setAddBatchUsers] = useState([
@@ -45,6 +52,10 @@ export default function AddBatchUsers() {
 
   return (
     <div className="main_class" style={{ backgroundImage: `url(${mainMenu})` }}>
+      <animated.div style={fadeIn}>
+        <img src={blue_shade} className="blue_shade_bg" alt="blue shade" />
+      </animated.div>
+
       <NavLink className="navigation_button_with_bigger_width_1" to="/add_user">
         <span id="first_span_navigation_button">
           <img src={backButton} alt="back" /> ADD USER /

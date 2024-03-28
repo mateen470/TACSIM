@@ -8,6 +8,7 @@ import Footer from '../utility/Footer';
 import Modal from '../utility/Modal';
 import playButton from '../TACSIM-img/playVideoButton.svg';
 import tutorialBackground from '../TACSIM-img/tutorialBackground.svg';
+import blue_shade from '../TACSIM-img/blu_shade.svg';
 
 export default function Tutorials() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -54,6 +55,9 @@ export default function Tutorials() {
 
   return (
     <div className="main_class" style={{ backgroundImage: `url(${mainMenu})` }}>
+      <animated.div style={fadeIn}>
+        <img src={blue_shade} className="blue_shade_bg" alt="blue shade" />
+      </animated.div>
       <NavLink className="navigation_button" to="/">
         <span id="first_span_navigation_button">
           <img src={backButton} alt="back" /> MAIN MENU /

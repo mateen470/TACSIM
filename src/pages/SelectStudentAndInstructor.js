@@ -6,10 +6,16 @@ import mainMenu from '../TACSIM-img/main_menu.svg';
 import backButton from '../TACSIM-img/back_button.svg';
 import Footer from '../utility/Footer';
 import plus from '../TACSIM-img/plus.svg';
+import blue_shade from '../TACSIM-img/blu_shade.svg';
 
 export default function SelectStudentAndInstructor() {
   const springs = useSpring({
-    from: { x: 2000, y: 80 },
+    from: { x: 2000, y: 190 },
+    to: { x: 0 },
+    delay: 200,
+  });
+  const spring2 = useSpring({
+    from: { x: -2000 },
     to: { x: 0 },
     delay: 200,
   });
@@ -52,6 +58,10 @@ export default function SelectStudentAndInstructor() {
 
   return (
     <div className="main_class" style={{ backgroundImage: `url(${mainMenu})` }}>
+      <animated.div style={spring2}>
+        <img src={blue_shade} className="blue_shade_bg" alt="blue shade" />
+      </animated.div>
+
       <NavLink className="navigation_button" to="/">
         <span id="first_span_navigation_button">
           <img src={backButton} alt="back" /> MAIN MENU /
