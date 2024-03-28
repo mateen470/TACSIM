@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import backButton from '../TACSIM-img/back_button.svg';
 import Modal from '../utility/Modal';
 import '../renderer/App.css';
-import { useState } from 'react';
 
-export default function SingleSimulation({ setToggle }) {
+export default function SingleSimulation({ toggle, setToggle }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
 
@@ -24,7 +24,13 @@ export default function SingleSimulation({ setToggle }) {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        opacity: toggle ? 0 : 1,
+        marginTop: toggle && '1500px',
+        transition: 'opacity 0.6s ease',
+      }}
+    >
       {teamDataToShow.map((data, index) => {
         return (
           <div

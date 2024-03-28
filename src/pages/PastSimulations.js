@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated, to } from 'react-spring';
 import { useDispatch } from 'react-redux';
 import { teamData } from '../redux/SimulationSlice';
 import mainMenu from '../TACSIM-img/main_menu.svg';
@@ -144,161 +144,169 @@ export default function PastSimulations() {
       </NavLink>
       <animated.div style={springs}>
         <div className="past_simulation_main_content_container">
-          {toggle && (
-            <div className="past_simulation_all_simulations_container">
-              <div className="past_simulation_tab_heading_filter_box">
-                <div className="past_simulation_tab_heading_box">
-                  <div
-                    onClick={() => setActive(false)}
-                    style={{
-                      cursor: 'pointer',
-                      color: !active ? 'white' : '#dae3eb',
-                      fontWeight: !active ? 700 : 600,
-                      fontSize: !active ? '1.6rem' : '1.4rem',
-                      transition: 'all 0.1s ease',
-                    }}
-                  >
-                    TRAINING
-                  </div>
-                  <div
-                    onClick={() => setActive(true)}
-                    style={{
-                      cursor: 'pointer',
-                      color: active ? 'white' : '#dae3eb',
-                      fontWeight: active ? 700 : 600,
-                      fontSize: active ? '1.6rem' : '1.4rem',
-                      transition: 'all 0.1s ease',
-                    }}
-                  >
-                    RECENT
-                  </div>
+          <div
+            className="past_simulation_all_simulations_container"
+            style={{
+              opacity: toggle ? 1 : 0,
+              height: !toggle && '0px',
+              zIndex: !toggle && -1,
+              transition: 'opacity 0.5s ease',
+            }}
+          >
+            <div className="past_simulation_tab_heading_filter_box">
+              <div className="past_simulation_tab_heading_box">
+                <div
+                  onClick={() => setActive(false)}
+                  style={{
+                    cursor: 'pointer',
+                    color: !active ? 'white' : '#dae3eb',
+                    fontWeight: !active ? 700 : 600,
+                    fontSize: !active ? '1.6rem' : '1.3rem',
+                    transition: 'all 0.1s ease',
+                  }}
+                >
+                  TRAINING
                 </div>
-                <div className="past_simulation_tab_filter_box">
-                  <div className="past_simulation_tab_filter">FILTER : </div>
-                  <img src={reset} alt="reset" style={{ cursor: 'pointer' }} />
+                <div
+                  onClick={() => setActive(true)}
+                  style={{
+                    cursor: 'pointer',
+                    color: active ? 'white' : '#dae3eb',
+                    fontWeight: active ? 700 : 600,
+                    fontSize: active ? '1.6rem' : '1.3rem',
+                    transition: 'all 0.1s ease',
+                  }}
+                >
+                  RECENT
                 </div>
               </div>
-
-              <div className="past_simulation_tab_table">
-                <div className="past_simulation_tab_table_heading_container">
-                  <div className="past_simulation_tab_table_name_heading">
-                    NAME
-                  </div>
-                  <div className="past_simulation_tab_table_heading">P. NO</div>
-                  <div className="past_simulation_tab_table_heading">SCORE</div>
-                  <div className="past_simulation_tab_table_heading_repeat"></div>
-                </div>
-
-                <div style={trainingStyle}>
-                  {trainingArray.map((data, index) => {
-                    const enemyVehiclesArray = Object.entries(
-                      data.enemyVehicle || {},
-                    );
-                    return (
-                      <div
-                        className="past_simulation_tab_table_data_container"
-                        key={index}
-                      >
-                        <div className="past_simulation_tab_table_name_data">
-                          <div
-                            id="past_simulation_tab_table_name_data_first_phrase"
-                            onClick={() => fillArrayOfClickedSimulation(data)}
-                          >
-                            {data.date}: {data.time} - {data.area}
-                          </div>
-                          <div id="past_simulation_tab_table_name_data_second_phrase">
-                            {data.terrain} -
-                            {enemyVehiclesArray.map(
-                              ([vehicleType, count], index) => {
-                                return (
-                                  <span key={index}>
-                                    {vehicleType.toUpperCase()} {count}
-                                    {index < enemyVehiclesArray.length - 1
-                                      ? ', '
-                                      : ''}
-                                  </span>
-                                );
-                              },
-                            )}
-                          </div>
-                        </div>
-                        <div
-                          className="past_simulation_tab_table_data"
-                          style={{ color: '#ffffff' }}
-                        >
-                          {data.PNO}
-                        </div>
-                        <div className="past_simulation_tab_table_data">
-                          {data.score}
-                        </div>
-                        <div
-                          className="past_simulation_tab_repeat_btn"
-                          onClick={() => fillArrayOfClickedSimulation(data)}
-                        >
-                          REPEAT
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div style={recentStyle}>
-                  {recentArray.map((data, index) => {
-                    const enemyVehiclesArray = Object.entries(
-                      data.enemyVehicle || {},
-                    );
-                    return (
-                      <div
-                        className="past_simulation_tab_table_data_container"
-                        key={index}
-                      >
-                        <div className="past_simulation_tab_table_name_data">
-                          <div
-                            id="past_simulation_tab_table_name_data_first_phrase"
-                            onClick={() => fillArrayOfClickedSimulation(data)}
-                          >
-                            {data.date}: {data.time} - {data.area}
-                          </div>
-                          <div id="past_simulation_tab_table_name_data_second_phrase">
-                            {data.terrain} -
-                            {enemyVehiclesArray.map(
-                              ([vehicleType, count], index) => {
-                                return (
-                                  <span key={index}>
-                                    {vehicleType.toUpperCase()} {count}
-                                    {index < enemyVehiclesArray.length - 1
-                                      ? ', '
-                                      : ''}
-                                  </span>
-                                );
-                              },
-                            )}
-                          </div>
-                        </div>
-                        <div
-                          className="past_simulation_tab_table_data"
-                          style={{ color: '#ffffff' }}
-                        >
-                          {data.PNO}
-                        </div>
-                        <div className="past_simulation_tab_table_data">
-                          {data.score}
-                        </div>
-                        <div
-                          className="past_simulation_tab_repeat_btn"
-                          onClick={() => fillArrayOfClickedSimulation(data)}
-                        >
-                          REPEAT
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+              <div className="past_simulation_tab_filter_box">
+                <div className="past_simulation_tab_filter">FILTER : </div>
+                <img src={reset} alt="reset" style={{ cursor: 'pointer' }} />
               </div>
             </div>
-          )}
 
-          {!toggle && <SingleSimulation setToggle={setToggle} />}
+            <div className="past_simulation_tab_table">
+              <div className="past_simulation_tab_table_heading_container">
+                <div className="past_simulation_tab_table_name_heading">
+                  NAME
+                </div>
+                <div className="past_simulation_tab_table_heading">P. NO</div>
+                <div className="past_simulation_tab_table_heading">SCORE</div>
+                <div className="past_simulation_tab_table_heading_repeat"></div>
+              </div>
+
+              <div style={trainingStyle}>
+                {trainingArray.map((data, index) => {
+                  const enemyVehiclesArray = Object.entries(
+                    data.enemyVehicle || {},
+                  );
+                  return (
+                    <div
+                      className="past_simulation_tab_table_data_container"
+                      key={index}
+                    >
+                      <div className="past_simulation_tab_table_name_data">
+                        <div
+                          id="past_simulation_tab_table_name_data_first_phrase"
+                          onClick={() => fillArrayOfClickedSimulation(data)}
+                        >
+                          {data.date}: {data.time} - {data.area}
+                        </div>
+                        <div id="past_simulation_tab_table_name_data_second_phrase">
+                          {data.terrain} -
+                          {enemyVehiclesArray.map(
+                            ([vehicleType, count], index) => {
+                              return (
+                                <span key={index}>
+                                  {vehicleType.toUpperCase()} {count}
+                                  {index < enemyVehiclesArray.length - 1
+                                    ? ', '
+                                    : ''}
+                                </span>
+                              );
+                            },
+                          )}
+                        </div>
+                      </div>
+                      <div
+                        className="past_simulation_tab_table_data"
+                        style={{ color: '#ffffff' }}
+                      >
+                        {data.PNO}
+                      </div>
+                      <div className="past_simulation_tab_table_data">
+                        {data.score}
+                      </div>
+                      <div
+                        className="past_simulation_tab_repeat_btn"
+                        onClick={() => fillArrayOfClickedSimulation(data)}
+                      >
+                        REPEAT
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div style={recentStyle}>
+                {recentArray.map((data, index) => {
+                  const enemyVehiclesArray = Object.entries(
+                    data.enemyVehicle || {},
+                  );
+                  return (
+                    <div
+                      className="past_simulation_tab_table_data_container"
+                      key={index}
+                    >
+                      <div className="past_simulation_tab_table_name_data">
+                        <div
+                          id="past_simulation_tab_table_name_data_first_phrase"
+                          onClick={() => fillArrayOfClickedSimulation(data)}
+                        >
+                          {data.date}: {data.time} - {data.area}
+                        </div>
+                        <div id="past_simulation_tab_table_name_data_second_phrase">
+                          {data.terrain} -
+                          {enemyVehiclesArray.map(
+                            ([vehicleType, count], index) => {
+                              return (
+                                <span key={index}>
+                                  {vehicleType.toUpperCase()} {count}
+                                  {index < enemyVehiclesArray.length - 1
+                                    ? ', '
+                                    : ''}
+                                </span>
+                              );
+                            },
+                          )}
+                        </div>
+                      </div>
+                      <div
+                        className="past_simulation_tab_table_data"
+                        style={{ color: '#ffffff' }}
+                      >
+                        {data.PNO}
+                      </div>
+                      <div className="past_simulation_tab_table_data">
+                        {data.score}
+                      </div>
+                      <div
+                        className="past_simulation_tab_repeat_btn"
+                        onClick={() => fillArrayOfClickedSimulation(data)}
+                      >
+                        REPEAT
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <SingleSimulation toggle={toggle} setToggle={setToggle} />
+          </div>
         </div>
       </animated.div>
 
