@@ -150,25 +150,37 @@ export default function Settings() {
     },
   ]);
 
+  const [deletingPC, setDeletingPC] = useState(null);
+
   const deleteSelectedPC = () => {
     if (!selectedPC) {
       return;
     }
+    setDeletingPC(selectedPC);
 
-    setSystems((prevSystems) => {
-      return prevSystems.map((group, groupIndex) => {
-        if (groupIndex === selectedPC.groupIndex) {
-          const updatedConnectedSystems = [...group.connectedSystems];
-          updatedConnectedSystems[selectedPC.PCindex] = null;
-          return { ...group, connectedSystems: updatedConnectedSystems };
-        }
-        return group;
+    setTimeout(() => {
+      setSystems((prevSystems) => {
+        return prevSystems.map((group, groupIndex) => {
+          if (groupIndex === selectedPC.groupIndex) {
+            const updatedConnectedSystems = group.connectedSystems.map(
+              (pc, pcIndex) => {
+                if (pcIndex === selectedPC.PCindex) {
+                  return { ...pc, deleted: true };
+                }
+                return pc;
+              },
+            );
+            return { ...group, connectedSystems: updatedConnectedSystems };
+          }
+          return group;
+        });
       });
-    });
 
-    setSoftwareArray([]);
-    setHardwareArray([]);
-    setSelectedPC(null);
+      setSoftwareArray([]);
+      setHardwareArray([]);
+      setSelectedPC(null);
+      setDeletingPC(null);
+    }, 500);
   };
 
   const addNewPC = () => {
@@ -176,27 +188,24 @@ export default function Settings() {
       let added = false;
       const updatedSystems = prevSystems.map((group, groupIndex) => {
         if (!added) {
-          const nullIndex = group.connectedSystems.findIndex(
-            (pc) => pc === null,
+          const deletedIndex = group.connectedSystems.findIndex(
+            (pc) => pc && pc.deleted,
           );
-          const groupName = String.fromCharCode('A'.charCodeAt(0) + groupIndex);
-          const pcName =
-            nullIndex !== -1
-              ? `${groupIndex + 1}-${String.fromCharCode(
-                  'A'.charCodeAt(0) + nullIndex,
-                )}`
-              : `${groupIndex + 1}-${String.fromCharCode(
-                  'A'.charCodeAt(0) + group.connectedSystems.length,
-                )}`;
+          const pcIndex =
+            deletedIndex !== -1 ? deletedIndex : group.connectedSystems.length;
+          const pcName = `${groupIndex + 1}-${String.fromCharCode(
+            'A'.charCodeAt(0) + pcIndex,
+          )}`;
 
           const newPC = {
             pcName: pcName,
             softwareDetails: [],
             hardwareDetails: [],
+            deleted: false,
           };
 
-          if (nullIndex !== -1) {
-            group.connectedSystems[nullIndex] = newPC;
+          if (deletedIndex !== -1) {
+            group.connectedSystems[deletedIndex] = newPC;
             added = true;
           } else if (group.connectedSystems.length < 3) {
             group.connectedSystems.push(newPC);
@@ -206,14 +215,13 @@ export default function Settings() {
         return group;
       });
 
-      if (!added && updatedSystems.length < 8) {
-        const groupName = String.fromCharCode(
-          'A'.charCodeAt(0) + updatedSystems.length,
-        );
+      if (!added) {
+        const newGroupIndex = updatedSystems.length;
         const newPC = {
-          pcName: `${updatedSystems.length + 1}-A`,
+          pcName: `${newGroupIndex + 1}-A`,
           softwareDetails: [],
           hardwareDetails: [],
+          deleted: false,
         };
         updatedSystems.push({
           connectedSystems: [newPC],
@@ -249,11 +257,11 @@ export default function Settings() {
                     {computer.connectedSystems.map((pcData, pcIndex) => {
                       let pcClass = 'computer_module fade-in';
 
-                      if (pcData === null) {
+                      if (pcData.deleted) {
                         return (
                           <div
                             key={pcIndex}
-                            className={pcClass}
+                            className="computer_module"
                             style={{ visibility: 'hidden', width: '108.69px' }}
                           ></div>
                         );
@@ -261,7 +269,13 @@ export default function Settings() {
 
                       return (
                         <div
-                          className={pcClass}
+                          className={`${pcClass} ${
+                            deletingPC &&
+                            deletingPC.groupIndex === index &&
+                            deletingPC.PCindex === pcIndex
+                              ? 'fade-out'
+                              : ''
+                          }`}
                           key={pcIndex}
                           onClick={() =>
                             handleSelectedPC(pcData, index, pcIndex)

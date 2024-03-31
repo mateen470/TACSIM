@@ -654,6 +654,18 @@ input[type='number'] {
     opacity: 1;
   }
 }
+.fade-out {
+  animation: fadeOutAnimation 0.5s forwards;
+}
+
+@keyframes fadeOutAnimation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 /* SETTINGS-END */
 
 /* TEST-MODE-START */
