@@ -183,7 +183,25 @@ export default function Settings() {
     }, 500);
   };
 
+  const totalActivePCs = systems.reduce(
+    (acc, group) =>
+      acc +
+      group.connectedSystems.filter((pc) => pc !== null && !pc.deleted).length,
+    0,
+  );
+
+  const addButtonDisabled = totalActivePCs >= 24;
+
   const addNewPC = () => {
+    const currentTotalPCs = systems.reduce(
+      (acc, group) =>
+        acc +
+        group.connectedSystems.filter((pc) => pc !== null && !pc.deleted)
+          .length,
+      0,
+    );
+    if (currentTotalPCs >= 24) return;
+
     setSystems((prevSystems) => {
       let added = false;
       const updatedSystems = prevSystems.map((group, groupIndex) => {
@@ -295,7 +313,14 @@ export default function Settings() {
             </div>
 
             <div className="computer_modules_btn_main_container">
-              <div className="btn_plus computer_module_btn" onClick={addNewPC}>
+              <div
+                className="btn_plus computer_module_btn"
+                onClick={addNewPC}
+                style={{
+                  opacity: addButtonDisabled ? 0.5 : 1,
+                  pointerEvents: addButtonDisabled ? 'none' : 'all',
+                }}
+              >
                 <img src={plus} alt="plus" />
                 <span>ADD PC</span>
               </div>
