@@ -383,6 +383,77 @@ input[type='number'] {
 }
 /*PAST-SIMULATION-END */
 
+/* SIMULATION-STARTS */
+.side_bar {
+  height: 100vh;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: absolute;
+  left: 0px;
+}
+.menu_side_bar {
+  margin-top: 15vh;
+}
+.menu_side_bar_items {
+  border-top: 2px solid #dae3eb69;
+  height: 70px;
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.simulation_sections {
+  position: absolute;
+  width: 75%;
+  right: 0px;
+}
+/* SIMULATION-END */
+
+/* CREAT-TEAM-START */
+.create_team_main_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  border: 1px solid white;
+  gap: 2rem;
+  overflow: hidden;
+}
+.create_team_box {
+  height: 80vh;
+  width: 50%;
+  border: 1px solid red;
+  overflow: auto;
+}
+.name_box,
+.team_player_name span {
+  height: 20px;
+  width: 175px;
+  border: 2px solid green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.team_box {
+  border: 1px solid pink;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.team_player_box {
+  display: flex;
+  gap: 1rem;
+}
+.team_name {
+  color: white;
+}
+
+/* CREAT-TEAM-END */
+
 /* TUTORIALS-START */
 .tutorials_main_content {
   display: flex;
@@ -657,7 +728,6 @@ input[type='number'] {
 .fade-out {
   animation: fadeOutAnimation 0.5s forwards;
 }
-
 @keyframes fadeOutAnimation {
   from {
     opacity: 1;
