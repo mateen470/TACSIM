@@ -24,6 +24,10 @@ input[type='number'] {
   background-repeat: no-repeat;
   background-size: cover;
 }
+.simulation_blur_bg {
+  height: 100vh;
+  backdrop-filter: blur(5px);
+}
 .blue_shade_bg {
   position: absolute;
   height: 100vh;
@@ -415,43 +419,131 @@ input[type='number'] {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  border: 1px solid white;
+  height: 85vh;
   gap: 2rem;
   overflow: hidden;
+  padding: 3rem;
+  margin-top: 6rem;
+}
+.create_team_main_content {
+  height: 770px;
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.136);
+  border-radius: 20px;
+  position: relative;
+}
+.create_team_tabs {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 656px;
+  top: 40px;
+}
+.create_team_tab {
+  cursor: pointer;
+  width: 220px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
 }
 .create_team_box {
-  height: 80vh;
-  width: 50%;
-  border: 1px solid red;
+  height: 600px;
   overflow: auto;
+  padding: 0rem 2.5rem;
+  margin-top: 8rem;
 }
 .name_box,
 .team_player_name span {
-  height: 20px;
-  width: 175px;
-  border: 2px solid green;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
+  height: 50px;
+  margin: 1rem 0rem;
+  font-size: 2rem;
+  font-weight: 600;
+  width: 420px;
+  text-transform: uppercase;
+}
+.name_box {
+  margin: 1rem auto;
 }
 .team_box {
-  border: 1px solid pink;
+  border: 1px solid rgba(255, 255, 255, 0.312);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  margin-bottom: 2rem;
+  height: 280px;
+  border-radius: 20px;
 }
 .team_player_box {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  height: 50px;
+  margin: 0.5rem 0rem;
+  width: 546px;
+  position: relative;
 }
 .team_name {
   color: white;
+  font-size: 2rem;
+  font-weight: 600;
 }
-
+.team_player_rank {
+  position: absolute;
+  right: 0px;
+}
+.team_player_rank_select {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.team_player_rank_menu {
+  margin-top: 0.2rem;
+  background-color: black;
+  width: 110px;
+  border-radius: 10px;
+  position: absolute;
+  height: 126.5px;
+  padding: 0.2rem;
+  z-index: 1000;
+}
+.team_player_rank_menu_item {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.team_player_rank_menu_item:hover {
+  transition: 0.3s all ease;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
 /* CREAT-TEAM-END */
 
 /* TUTORIALS-START */

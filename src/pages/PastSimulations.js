@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSpring, animated, to } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 import { useDispatch } from 'react-redux';
 import { teamData } from '../redux/SimulationSlice';
 import mainMenu from '../TACSIM-img/main_menu.svg';
