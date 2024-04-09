@@ -7,7 +7,7 @@ import '../renderer/App.css';
 
 // const { ipcRenderer } = require('electron');
 
-export default function Footer(footerNumber) {
+export default function Footer({ footerNumber }) {
   // const dataArrayState = useSelector((state) => state.dataArray);
   // // Function to save the state to a JSON file
   // const saveStateToJsonFile = () => {
@@ -48,8 +48,8 @@ export default function Footer(footerNumber) {
       </div>
       {footerNumber === 2 && (
         <div className="footer_second_box">
-          <NavLink className="underline" to="/tutorials">
-            TUTORIALS
+          <NavLink className="underline" to="/">
+            CANCEL
           </NavLink>
           <div id="footer_second_box_second_span">
             <NavLink
@@ -57,7 +57,7 @@ export default function Footer(footerNumber) {
               to="/dashboard"
               // onClick={saveStateToJsonFile}
             >
-              CONTINUE
+              SAVE
             </NavLink>
             {/* <button className="underline" >
             CONTINUE

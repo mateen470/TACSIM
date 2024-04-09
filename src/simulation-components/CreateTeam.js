@@ -1,10 +1,12 @@
 import '../renderer/App.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import search from '../TACSIM-img/search.svg';
 import RankDropDown from '../utility/RankDropDown';
 
 export default function CreateTeam() {
   const [toggle, setToggle] = useState(true);
+  const [seacrhedName, setSearchedName] = useState('');
   const [names, setNames] = useState([
     { playerName: 'ALI' },
     { playerName: 'AHMED' },
@@ -21,7 +23,7 @@ export default function CreateTeam() {
   const [team, setTeam] = useState({
     studentArray: [
       {
-        teamName: 'TP-1',
+        teamName: '1st Tp',
         teamPlayers: [
           {
             teamPlayerName: '',
@@ -38,7 +40,7 @@ export default function CreateTeam() {
         ],
       },
       {
-        teamName: 'TP-2',
+        teamName: '2nd Tp',
         teamPlayers: [
           {
             teamPlayerName: '',
@@ -55,7 +57,7 @@ export default function CreateTeam() {
         ],
       },
       {
-        teamName: 'TP-3',
+        teamName: '3rd Tp',
         teamPlayers: [
           {
             teamPlayerName: '',
@@ -65,6 +67,75 @@ export default function CreateTeam() {
             teamPlayerName: '',
             teamPlayerRank: '',
           },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+        ],
+      },
+      {
+        teamName: '4th Tp',
+        teamPlayers: [
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+        ],
+      },
+      {
+        teamName: 'MIB',
+        teamPlayers: [
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+        ],
+      },
+      {
+        teamName: 'HAT / LAT',
+        teamPlayers: [
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+        ],
+      },
+      {
+        teamName: 'SQUAD COMMANDER',
+        teamPlayers: [
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+        ],
+      },
+      {
+        teamName: '2IC',
+        teamPlayers: [
           {
             teamPlayerName: '',
             teamPlayerRank: '',
@@ -74,7 +145,7 @@ export default function CreateTeam() {
     ],
     enemyArray: [
       {
-        teamName: 'TP-1',
+        teamName: '1st Tp',
         teamPlayers: [
           {
             teamPlayerName: '',
@@ -91,7 +162,7 @@ export default function CreateTeam() {
         ],
       },
       {
-        teamName: 'TP-2',
+        teamName: '2nd Tp',
         teamPlayers: [
           {
             teamPlayerName: '',
@@ -108,7 +179,7 @@ export default function CreateTeam() {
         ],
       },
       {
-        teamName: 'TP-3',
+        teamName: '3rd Tp',
         teamPlayers: [
           {
             teamPlayerName: '',
@@ -118,6 +189,75 @@ export default function CreateTeam() {
             teamPlayerName: '',
             teamPlayerRank: '',
           },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+        ],
+      },
+      {
+        teamName: '4th Tp',
+        teamPlayers: [
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+        ],
+      },
+      {
+        teamName: 'MIB',
+        teamPlayers: [
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+        ],
+      },
+      {
+        teamName: 'HAT / LAT',
+        teamPlayers: [
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+        ],
+      },
+      {
+        teamName: 'SQUAD COMMANDER',
+        teamPlayers: [
+          {
+            teamPlayerName: '',
+            teamPlayerRank: '',
+          },
+        ],
+      },
+      {
+        teamName: '2IC',
+        teamPlayers: [
           {
             teamPlayerName: '',
             teamPlayerRank: '',
@@ -317,18 +457,35 @@ export default function CreateTeam() {
   };
 
   const dropenemy = {
-    display: !toggle ? 'block' : 'none',
+    height: toggle && '0px',
+    marginTop: '0px',
     transition: 'all 0.4s ease-in-out',
   };
 
   const dropStudents = {
-    display: toggle ? 'block' : 'none',
+    height: !toggle && '0px',
     transition: 'all 0.4s ease-in-out',
   };
+
+  useEffect(() => {
+    if (seacrhedName !== '') {
+      const searchResult = names.filter(({ playerName }) =>
+        playerName.toLowerCase().includes(seacrhedName.toLowerCase()),
+      );
+      if (searchResult.length > 0) {
+        const remainingNames = names.filter(
+          ({ playerName }) =>
+            !playerName.toLowerCase().includes(seacrhedName.toLowerCase()),
+        );
+        setNames([...searchResult, ...remainingNames]);
+      }
+    }
+  }, [seacrhedName]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="create_team_main_container">
+        <div className="page_heading">SELECT STUDENT / INSTRUCTOR</div>
         <div className="create_team_main_content">
           <div className="create_team_tabs">
             <div
@@ -337,6 +494,7 @@ export default function CreateTeam() {
               style={{
                 color: toggle ? '#ffffff' : '#465463',
                 fontWeight: toggle ? '700' : '500',
+                transition: 'color 0.1s ease',
               }}
             >
               DROP STUDENTS
@@ -347,6 +505,7 @@ export default function CreateTeam() {
               style={{
                 color: !toggle ? '#ffffff' : '#465463',
                 fontWeight: !toggle ? '700' : '500',
+                transition: 'color 0.1s ease',
               }}
             >
               DROP ENEMY
@@ -355,7 +514,17 @@ export default function CreateTeam() {
 
           <div className="create_team_box" style={dropStudents}>
             {team.studentArray.map((teamData, teamIndex) => (
-              <div className="team_box" key={teamIndex}>
+              <div
+                className="team_box"
+                key={teamIndex}
+                style={{
+                  height:
+                    teamData.teamName === 'SQUAD COMMANDER' ||
+                    teamData.teamName === '2IC'
+                      ? '210px'
+                      : '280px',
+                }}
+              >
                 {teamData.teamPlayers.map((teamPlayer, playerIndex) => (
                   <div className="team_player_box" key={playerIndex}>
                     <Droppable
@@ -408,7 +577,17 @@ export default function CreateTeam() {
 
           <div className="create_team_box" style={dropenemy}>
             {team.enemyArray.map((teamData, teamIndex) => (
-              <div className="team_box" key={teamIndex}>
+              <div
+                className="team_box"
+                key={teamIndex}
+                style={{
+                  height:
+                    teamData.teamName === 'SQUAD COMMANDER' ||
+                    teamData.teamName === '2IC'
+                      ? '210px'
+                      : '280px',
+                }}
+              >
                 {teamData.teamPlayers.map((teamPlayer, playerIndex) => (
                   <div className="team_player_box" key={playerIndex}>
                     <Droppable
@@ -460,10 +639,16 @@ export default function CreateTeam() {
           </div>
         </div>
         <div className="create_team_main_content">
+          <div className="all_students_heading">ALL STUDENTS</div>
+          <input
+            value={seacrhedName}
+            onChange={(e) => setSearchedName(e.target.value)}
+          />
+          <img src={search} alt="search" />
           <Droppable droppableId="names">
             {(provided) => (
               <div
-                className="create_team_box"
+                className="create_team_box "
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >

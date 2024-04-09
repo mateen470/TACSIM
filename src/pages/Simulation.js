@@ -88,7 +88,7 @@ export default function Simulation() {
         )} */}
         </div>
 
-        <Footer />
+        <Footer footerNumber={2} />
       </div>
     </div>
   );

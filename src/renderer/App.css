@@ -113,6 +113,14 @@ input[type='number'] {
   backdrop-filter: blur(10px);
   background-color: rgba(255, 255, 255, 0.09);
 }
+.page_heading {
+  position: absolute;
+  color: white;
+  font-weight: 600;
+  font-size: 2.2rem;
+  top: 50px;
+  left: 0px;
+}
 /* COMMON STYLE-END */
 
 /* MAIN-MENU STYLING--START */
@@ -443,9 +451,9 @@ input[type='number'] {
 }
 .create_team_tab {
   cursor: pointer;
-  width: 220px;
+  width: 240px;
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
 }
 .create_team_box {
@@ -479,7 +487,6 @@ input[type='number'] {
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
-  height: 280px;
   border-radius: 20px;
 }
 .team_player_box {
@@ -543,6 +550,36 @@ input[type='number'] {
   transition: 0.3s all ease;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
+}
+.all_students_heading {
+  position: absolute;
+  text-align: center;
+  width: 656px;
+  font-size: 2.5rem;
+  color: white;
+  font-weight: 600;
+  top: 20px;
+}
+.create_team_main_content input {
+  outline: none;
+  border: none;
+  background: none;
+  width: 420px;
+  height: 50px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0rem 3rem 0rem 1rem;
+  position: absolute;
+  left: 118px;
+  top: 77px;
+}
+.create_team_main_content img {
+  position: absolute;
+  right: 125px;
+  top: 82px;
 }
 /* CREAT-TEAM-END */
 
@@ -964,9 +1001,6 @@ input[type='number'] {
   width: 300px;
   padding: 1rem 2rem;
   border-left: 1px solid #dae3eb69;
-}
-#footer_second_box_second_span a {
-  color: #8b8f90;
 }
 .underline:hover {
   text-decoration: underline;
