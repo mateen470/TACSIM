@@ -1,271 +1,19 @@
 import '../renderer/App.css';
 import React, { useEffect, useState } from 'react';
+import { useSpring, animated } from 'react-spring';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import search from '../TACSIM-img/search.svg';
 import RankDropDown from '../utility/RankDropDown';
 
-export default function CreateTeam() {
+export default function CreateTeam({ team, setTeam, names, setNames }) {
+  const springs = useSpring({
+    from: { x: 2000 },
+    to: { x: 0 },
+    delay: 200,
+  });
+
   const [toggle, setToggle] = useState(true);
   const [seacrhedName, setSearchedName] = useState('');
-  const [names, setNames] = useState([
-    { playerName: 'ALI' },
-    { playerName: 'AHMED' },
-    { playerName: 'ABDULLAH' },
-    { playerName: 'NOUMAN' },
-    { playerName: 'UMAIR' },
-    { playerName: 'KHAN' },
-    { playerName: 'RAJU' },
-    { playerName: 'BHEEM' },
-    { playerName: 'GOKU' },
-    { playerName: 'GIRIN' },
-  ]);
-
-  const [team, setTeam] = useState({
-    studentArray: [
-      {
-        teamName: '1st Tp',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: '2nd Tp',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: '3rd Tp',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: '4th Tp',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: 'MIB',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: 'HAT / LAT',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: 'SQUAD COMMANDER',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: '2IC',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-    ],
-    enemyArray: [
-      {
-        teamName: '1st Tp',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: '2nd Tp',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: '3rd Tp',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: '4th Tp',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: 'MIB',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: 'HAT / LAT',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: 'SQUAD COMMANDER',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-      {
-        teamName: '2IC',
-        teamPlayers: [
-          {
-            teamPlayerName: '',
-            teamPlayerRank: '',
-          },
-        ],
-      },
-    ],
-  });
 
   const handlePlayerRankChange = (teamIndex, playerIndex, value) => {
     const updatedTeams = { ...team };
@@ -484,197 +232,199 @@ export default function CreateTeam() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="create_team_main_container">
-        <div className="page_heading">SELECT STUDENT / INSTRUCTOR</div>
-        <div className="create_team_main_content">
-          <div className="create_team_tabs">
-            <div
-              className="create_team_tab"
-              onClick={() => setToggle(true)}
-              style={{
-                color: toggle ? '#ffffff' : '#465463',
-                fontWeight: toggle ? '700' : '500',
-                transition: 'color 0.1s ease',
-              }}
-            >
-              DROP STUDENTS
-            </div>
-            <div
-              className="create_team_tab"
-              onClick={() => setToggle(false)}
-              style={{
-                color: !toggle ? '#ffffff' : '#465463',
-                fontWeight: !toggle ? '700' : '500',
-                transition: 'color 0.1s ease',
-              }}
-            >
-              DROP ENEMY
-            </div>
-          </div>
-
-          <div className="create_team_box" style={dropStudents}>
-            {team.studentArray.map((teamData, teamIndex) => (
+      <div className="page_heading">SELECT STUDENT / INSTRUCTOR</div>
+      <animated.div style={springs}>
+        <div className="create_team_main_container">
+          <div className="create_team_main_content">
+            <div className="create_team_tabs">
               <div
-                className="team_box"
-                key={teamIndex}
+                className="create_team_tab"
+                onClick={() => setToggle(true)}
                 style={{
-                  height:
-                    teamData.teamName === 'SQUAD COMMANDER' ||
-                    teamData.teamName === '2IC'
-                      ? '210px'
-                      : '280px',
+                  color: toggle ? '#ffffff' : '#465463',
+                  fontWeight: toggle ? '700' : '500',
+                  transition: 'color 0.1s ease',
                 }}
               >
-                {teamData.teamPlayers.map((teamPlayer, playerIndex) => (
-                  <div className="team_player_box" key={playerIndex}>
-                    <Droppable
-                      droppableId={`student-teamPlayer-${teamIndex}-${playerIndex}`}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.droppableProps}
-                        >
-                          {teamPlayer.teamPlayerName ? (
-                            <Draggable
-                              draggableId={`student-drag-${teamIndex}-${playerIndex}`}
-                              index={0}
-                            >
-                              {(provided, snapshot) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  className={`team_player_name ${
-                                    snapshot.isDragging ? 'dragging' : ''
-                                  }`}
-                                >
-                                  <span>{teamPlayer.teamPlayerName}</span>
-                                </div>
-                              )}
-                            </Draggable>
-                          ) : (
-                            <div className="team_player_name">
-                              <span>{teamPlayer.teamPlayerName}</span>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </Droppable>
-
-                    <RankDropDown
-                      teamIndex={teamIndex}
-                      playerIndex={playerIndex}
-                      teamPlayer={teamPlayer}
-                      handlePlayerRankChange={handlePlayerRankChange}
-                    />
-                  </div>
-                ))}
-                <div className="team_name">{teamData.teamName}</div>
+                DROP STUDENTS
               </div>
-            ))}
-          </div>
-
-          <div className="create_team_box" style={dropenemy}>
-            {team.enemyArray.map((teamData, teamIndex) => (
               <div
-                className="team_box"
-                key={teamIndex}
+                className="create_team_tab"
+                onClick={() => setToggle(false)}
                 style={{
-                  height:
-                    teamData.teamName === 'SQUAD COMMANDER' ||
-                    teamData.teamName === '2IC'
-                      ? '210px'
-                      : '280px',
+                  color: !toggle ? '#ffffff' : '#465463',
+                  fontWeight: !toggle ? '700' : '500',
+                  transition: 'color 0.1s ease',
                 }}
               >
-                {teamData.teamPlayers.map((teamPlayer, playerIndex) => (
-                  <div className="team_player_box" key={playerIndex}>
-                    <Droppable
-                      droppableId={`enemy-teamPlayer-${teamIndex}-${playerIndex}`}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.droppableProps}
-                        >
-                          {teamPlayer.teamPlayerName ? (
-                            <Draggable
-                              draggableId={`enemy-drag-${teamIndex}-${playerIndex}`}
-                              index={0}
-                            >
-                              {(provided, snapshot) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  className={`team_player_name ${
-                                    snapshot.isDragging ? 'dragging' : ''
-                                  }`}
-                                >
-                                  <span>{teamPlayer.teamPlayerName}</span>
-                                </div>
-                              )}
-                            </Draggable>
-                          ) : (
-                            <div className="team_player_name">
-                              <span>{teamPlayer.teamPlayerName}</span>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </Droppable>
-
-                    <RankDropDown
-                      teamIndex={teamIndex}
-                      playerIndex={playerIndex}
-                      teamPlayer={teamPlayer}
-                      handlePlayerRankChange={handleEnemyPlayerRankChange}
-                    />
-                  </div>
-                ))}
-                <div className="team_name">{teamData.teamName}</div>
+                DROP ENEMY
               </div>
-            ))}
-          </div>
-        </div>
-        <div className="create_team_main_content">
-          <div className="all_students_heading">ALL STUDENTS</div>
-          <input
-            value={seacrhedName}
-            onChange={(e) => setSearchedName(e.target.value)}
-          />
-          <img src={search} alt="search" />
-          <Droppable droppableId="names">
-            {(provided) => (
-              <div
-                className="create_team_box "
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                {names.map((data, index) => (
-                  <Draggable
-                    key={index}
-                    draggableId={`name-${index}`}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <div
-                        className="name_box"
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
+            </div>
+
+            <div className="create_team_box" style={dropStudents}>
+              {team.studentArray.map((teamData, teamIndex) => (
+                <div
+                  className="team_box"
+                  key={teamIndex}
+                  style={{
+                    height:
+                      teamData.teamName === 'SQUAD COMMANDER' ||
+                      teamData.teamName === '2IC'
+                        ? '210px'
+                        : '280px',
+                  }}
+                >
+                  {teamData.teamPlayers.map((teamPlayer, playerIndex) => (
+                    <div className="team_player_box" key={playerIndex}>
+                      <Droppable
+                        droppableId={`student-teamPlayer-${teamIndex}-${playerIndex}`}
                       >
-                        {data.playerName}
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-              </div>
-            )}
-          </Droppable>
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                          >
+                            {teamPlayer.teamPlayerName ? (
+                              <Draggable
+                                draggableId={`student-drag-${teamIndex}-${playerIndex}`}
+                                index={0}
+                              >
+                                {(provided, snapshot) => (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    className={`team_player_name ${
+                                      snapshot.isDragging ? 'dragging' : ''
+                                    }`}
+                                  >
+                                    <span>{teamPlayer.teamPlayerName}</span>
+                                  </div>
+                                )}
+                              </Draggable>
+                            ) : (
+                              <div className="team_player_name">
+                                <span>{teamPlayer.teamPlayerName}</span>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </Droppable>
+
+                      <RankDropDown
+                        teamIndex={teamIndex}
+                        playerIndex={playerIndex}
+                        teamPlayer={teamPlayer}
+                        handlePlayerRankChange={handlePlayerRankChange}
+                      />
+                    </div>
+                  ))}
+                  <div className="team_name">{teamData.teamName}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="create_team_box" style={dropenemy}>
+              {team.enemyArray.map((teamData, teamIndex) => (
+                <div
+                  className="team_box"
+                  key={teamIndex}
+                  style={{
+                    height:
+                      teamData.teamName === 'SQUAD COMMANDER' ||
+                      teamData.teamName === '2IC'
+                        ? '210px'
+                        : '280px',
+                  }}
+                >
+                  {teamData.teamPlayers.map((teamPlayer, playerIndex) => (
+                    <div className="team_player_box" key={playerIndex}>
+                      <Droppable
+                        droppableId={`enemy-teamPlayer-${teamIndex}-${playerIndex}`}
+                      >
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                          >
+                            {teamPlayer.teamPlayerName ? (
+                              <Draggable
+                                draggableId={`enemy-drag-${teamIndex}-${playerIndex}`}
+                                index={0}
+                              >
+                                {(provided, snapshot) => (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    className={`team_player_name ${
+                                      snapshot.isDragging ? 'dragging' : ''
+                                    }`}
+                                  >
+                                    <span>{teamPlayer.teamPlayerName}</span>
+                                  </div>
+                                )}
+                              </Draggable>
+                            ) : (
+                              <div className="team_player_name">
+                                <span>{teamPlayer.teamPlayerName}</span>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </Droppable>
+
+                      <RankDropDown
+                        teamIndex={teamIndex}
+                        playerIndex={playerIndex}
+                        teamPlayer={teamPlayer}
+                        handlePlayerRankChange={handleEnemyPlayerRankChange}
+                      />
+                    </div>
+                  ))}
+                  <div className="team_name">{teamData.teamName}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="create_team_main_content">
+            <div className="all_students_heading">ALL STUDENTS</div>
+            <input
+              value={seacrhedName}
+              onChange={(e) => setSearchedName(e.target.value)}
+            />
+            <img src={search} alt="search" />
+            <Droppable droppableId="names">
+              {(provided) => (
+                <div
+                  className="create_team_box "
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {names.map((data, index) => (
+                    <Draggable
+                      key={index}
+                      draggableId={`name-${index}`}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <div
+                          className="name_box"
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          {data.playerName}
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                </div>
+              )}
+            </Droppable>
+          </div>
         </div>
-      </div>
+      </animated.div>
     </DragDropContext>
   );
 }
